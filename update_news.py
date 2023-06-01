@@ -340,7 +340,7 @@ if __name__ == "__main__":
 
     for name in (
         "gameguru",
-        "igromania",
+        "igroania",
         "stopgame",
         "cubiq",
         "shazoo",
@@ -349,7 +349,6 @@ if __name__ == "__main__":
         "ixbt_games",
         "playground",
         "kgportal",
-        "gameguru",
     ):
         try:
             print(name)
