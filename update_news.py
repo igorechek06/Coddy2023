@@ -277,8 +277,9 @@ def playground() -> list:
             k = j.find_all_next("img")[0]
             d["title"] = k["alt"]
             d["image_url"] = k["src"]
-            d["page_url"] = (
-                "https://www.playground.ru" + j.find_all_next("a")[0]["href"]
+            d["page_url"] = urljoin(
+                "https://www.playground.ru",
+                j.find_all_next("a")[0]["href"],
             )
             d["site_name"] = "Playground"
             d["site_link"] = "https://www.playground.ru"
