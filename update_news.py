@@ -1,5 +1,6 @@
 import json
 import re
+from random import randint
 from traceback import print_exc
 from urllib.parse import urljoin
 
@@ -36,6 +37,8 @@ def gameguru() -> list:
                     "page_url": url,
                     "site_name": "Gameguru",
                     "site_link": BASE_URL,
+                    "likes": randint(1, 30),
+                    "viewers": randint(500, 2500),
                 }
             )
     return news
@@ -63,6 +66,8 @@ def igromania() -> list:
                 "page_url": url,
                 "site_name": "Igromania",
                 "site_link": BASE_URL,
+                "likes": randint(1, 30),
+                "viewers": randint(500, 2500),
             }
         )
     return news
@@ -92,6 +97,8 @@ def stopgame() -> list:
                     "page_url": url,
                     "site_name": "StopGame",
                     "site_link": BASE_URL,
+                    "likes": randint(1, 30),
+                    "viewers": randint(500, 2500),
                 }
             )
     return news
@@ -121,6 +128,8 @@ def cubiq() -> list:
                     "page_url": url,
                     "site_name": "Cubiq",
                     "site_link": BASE_URL,
+                    "likes": randint(1, 30),
+                    "viewers": randint(500, 2500),
                 }
             )
     return news
@@ -151,6 +160,8 @@ def shazoo() -> list:
                     "page_url": url,
                     "site_name": "Shazoo",
                     "site_link": BASE_URL,
+                    "likes": randint(1, 30),
+                    "viewers": randint(500, 2500),
                 }
             )
         return news
@@ -187,6 +198,8 @@ def goharu() -> list:
                     "page_url": url,
                     "site_name": "Goharu",
                     "site_link": BASE_URL,
+                    "likes": randint(1, 30),
+                    "viewers": randint(500, 2500),
                 }
             )
         return news
@@ -223,6 +236,8 @@ def kanobu() -> list:
         )[0].h1.text
         d["site_name"] = "Kanobu"
         d["site_link"] = "https://kanobu.ru/videogames/"
+        d["likes"] = randint(1, 30)
+        d["viewers"] = randint(500, 2500)
 
         answ.append(d)
 
@@ -246,6 +261,8 @@ def ixbt_games() -> list:
         ].text.strip()
         d["site_name"] = "iXBT.games"
         d["site_link"] = "https://ixbt.games"
+        d["likes"] = randint(1, 30)
+        d["viewers"] = randint(500, 2500)
         answ.append(d)
     res = requests.get(soup.find_all("a", class_="page-link")[0]["href"])
     soup = bs4.BeautifulSoup(res.text, "html.parser")
@@ -261,6 +278,8 @@ def ixbt_games() -> list:
         ].text.strip()
         d["site_name"] = "iXBT.games"
         d["site_link"] = "https://ixbt.games"
+        d["likes"] = randint(1, 30)
+        d["viewers"] = randint(500, 2500)
         answ.append(d)
     return answ
 
@@ -283,6 +302,8 @@ def playground() -> list:
             )
             d["site_name"] = "Playground"
             d["site_link"] = "https://www.playground.ru"
+            d["likes"] = randint(1, 30)
+            d["viewers"] = randint(500, 2500)
             answ.append(d)
     return answ
 
@@ -309,6 +330,8 @@ def kgportal() -> list:
             )
             d["site_name"] = "КГ-ПОРТАЛ"
             d["site_link"] = "https://kg-portal.ru/news/games/"
+            d["likes"] = randint(1, 30)
+            d["viewers"] = randint(500, 2500)
             answ.append(d)
     return answ
 

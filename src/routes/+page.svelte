@@ -42,13 +42,13 @@
           <div class="card-body">
             <h5 class="card-title">{element.title}</h5>
             {#if element.description}
-              <div class="overflow-auto">
+              <div class="overflow-auto" style="max-height: 10rem;">
                 <p class="card-text">
                   {element.description}
                 </p>
               </div>
             {/if}
-            <a href={element.page_url} class="btn w-100 btn-primary">Читать</a>
+            <a href={element.page_url}>Читать далее ...</a>
           </div>
           <div class="card-footer justify-content-between d-flex">
             <div>
