@@ -1,7 +1,6 @@
 import json
 import re
 from random import randint
-from traceback import print_exc
 from urllib.parse import urljoin
 
 import bs4
@@ -298,7 +297,7 @@ def playground() -> list:
             d["image_url"] = k["src"]
             d["page_url"] = urljoin(
                 "https://www.playground.ru",
-                j.find_all_next("a")[0]["href"],
+                j.select_one(".post-title>a").attrs["href"],
             )
             d["site_name"] = "Playground"
             d["site_link"] = "https://www.playground.ru"
@@ -339,29 +338,24 @@ def kgportal() -> list:
 if __name__ == "__main__":
     done = []
 
-    try:
-        print("gameguru")
-        done += gameguru()
-        print("igromania")
-        done += igromania()
-        print("stopgame")
-        done += stopgame()
-        print("cubiq")
-        done += cubiq()
-        print("shazoo")
-        done += shazoo()
-        print("goharu")
-        done += goharu()
-        # print("kanobu")
-        # done += kanobu()
-        print("ixbt")
-        done += ixbt_games()
-        print("playground")
-        done += playground()
-        print("kgportal")
-        done += kgportal()
-    except Exception as e:
-        print_exc()
-    finally:
-        with open("news.json", "w") as file:
-            json.dump(done, file)
+    for name in (
+        "gameguru",
+        "igromania",
+        "stopgame",
+        "cubiq",
+        "shazoo",
+        "goharu",
+        "kanobu",
+        "ixbt_games",
+        "playground",
+        "kgportal",
+        "gameguru",
+    ):
+        try:
+            print(name)
+            done += globals()[name]()
+        except Exception as e:
+            print(e)
+        finally:
+            with open("news.json", "w") as file:
+                json.dump(done, file)
