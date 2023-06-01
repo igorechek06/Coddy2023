@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" context="module">
   type Element = {
     page_url: string;
     image_url: string;
@@ -10,22 +10,10 @@
     site_link: string;
   };
 
-  let news: Element[] = [];
-  for (let i = 0; i <= 10; i++) {
-    news.push({
-      page_url:
-        "https://dtf.ru/games/1841059-cikly-lyubov-i-cikly-lyubvi-slozhnye-syuzhety-bayonetta",
-      image_url:
-        "https://leonardo.osnova.io/7adf51c4-05c1-5ad6-b405-6aabbef1f4bf/-/preview/1800/-/format/webp/",
-      title: "Циклы, любовь и циклы любви — сложные сюжеты Bayonetta",
-      description:
-        "Что, если я скажу вам, что каждая Bayonetta была игрой о любви? Что, если за эталонным слешером и сложным сюжетом стоят несколько историй любви, переплетающихся воедино? Не верите? Ну что ж, обо всём по порядку.",
-      viewers: 1000,
-      likes: 250,
-      site_name: "DTF Games",
-      site_link: "https://dtf.ru/games/",
-    });
-  }
+  let response = await fetch(
+    "https://raw.githubusercontent.com/igorechek06/Coddy2023/master/news.json"
+  );
+  let news: Element[] = await response.json();
 </script>
 
 <nav class="navbar bg-body-tertiary mb-3 sticky-top shadow-lg">
@@ -49,7 +37,7 @@
   <div class="row justify-content-center">
     {#each news as element}
       <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-3">
-        <div class="card shadow">
+        <div class="card shadow h-100">
           <img src={element.image_url} class="card-img-top" alt="Header" />
           <div class="card-body">
             <h5 class="card-title">{element.title}</h5>

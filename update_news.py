@@ -21,7 +21,9 @@ def gameguru() -> list:
         for pub in publications:
             title = pub.select_one("div.short-news-title a").contents[0]
             description = None
-            image = BASE_URL + pub.select_one("img").attrs["src"]
+            if title == "LootGuru":
+                continue
+            image = urljoin(BASE_URL, pub.select_one("picture>source").attrs["srcset"])
             url = urljoin(
                 BASE_URL, pub.select_one("div.short-news-title a").attrs["href"]
             )
@@ -138,7 +140,7 @@ def shazoo() -> list:
         for pub in publications:
             title = pub.select_one("h4 a").contents[0]
             description = pub.select_one("div.break-words").contents[0].strip()
-            image = pub.select_one("img").attrs["src"]
+            image = pub.select_one('img[class="rounded"]').attrs["src"]
             url = pub.select_one("h4 a").attrs["href"]
 
             news.append(
@@ -210,7 +212,7 @@ def kanobu() -> list:
         d = {}
         d["page_url"] = url + i
         d["description"] = None
-        d["img_url"] = soup.find_all(
+        d["image_url"] = soup.find_all(
             "img",
             src=re.compile(
                 r"https\:\/\/cdn\.kanobu\.ru\/articles\/pics\/tmp\/images\/.+"
@@ -234,7 +236,7 @@ def ixbt_games() -> list:
     answ = []
     for i in soup.find_all("div", class_="py-2"):
         d = {}
-        d["img_url"] = i.find_all_next("img")[0]["src"]
+        d["image_url"] = i.find_all_next("img")[0]["src"]
         d["page_url"] = (
             "https://ixbt.games" + i.find_all_next("a", class_="card-link")[0]["href"]
         )
@@ -249,7 +251,7 @@ def ixbt_games() -> list:
     soup = bs4.BeautifulSoup(res.text, "html.parser")
     for i in soup.find_all("div", class_="py-2"):
         d = {}
-        d["img_url"] = i.find_all_next("img")[0]["src"]
+        d["image_url"] = i.find_all_next("img")[0]["src"]
         d["page_url"] = (
             "https://ixbt.games" + i.find_all_next("a", class_="card-link")[0]["href"]
         )
@@ -274,7 +276,7 @@ def playground() -> list:
             d["description"] = None
             k = j.find_all_next("img")[0]
             d["title"] = k["alt"]
-            d["img_url"] = k["src"]
+            d["image_url"] = k["src"]
             d["page_url"] = (
                 "https://www.playground.ru" + j.find_all_next("a")[0]["href"]
             )
@@ -298,7 +300,7 @@ def kgportal() -> list:
             d["description"] = j.find_all_next("div", class_="news_text")[
                 0
             ].text.strip()
-            d["img_url"] = (
+            d["image_url"] = (
                 "https://kg-portal.ru"
                 + j.find_all_next("div", class_="news_text")[0].find_all_next("img")[0][
                     "src"
