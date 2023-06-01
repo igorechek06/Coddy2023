@@ -300,11 +300,11 @@ def kgportal() -> list:
             d["description"] = j.find_all_next("div", class_="news_text")[
                 0
             ].text.strip()
-            d["image_url"] = (
-                "https://kg-portal.ru"
-                + j.find_all_next("div", class_="news_text")[0].find_all_next("img")[0][
+            d["image_url"] = urljoin(
+                "https://kg-portal.ru",
+                j.find_all_next("div", class_="news_text")[0].find_all_next("img")[0][
                     "src"
-                ]
+                ],
             )
             d["site_name"] = "КГ-ПОРТАЛ"
             d["site_link"] = "https://kg-portal.ru/news/games/"
@@ -328,8 +328,8 @@ if __name__ == "__main__":
         done += shazoo()
         print("goharu")
         done += goharu()
-        print("kanobu")
-        done += kanobu()
+        # print("kanobu")
+        # done += kanobu()
         print("ixbt")
         done += ixbt_games()
         print("playground")
